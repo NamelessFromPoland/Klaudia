@@ -2,60 +2,91 @@
 <html lang="pl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Prezentacja PDF</title>
 <style>
-	* { box-sizing: border-box; }
-	html, body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-		overflow: hidden;
-	}
-	body {
-		background: #18191d;
-		font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-		color: white;
-		display: flex;
-		flex-direction: column;
-	}
-	header {
-		height: 56px;
-		flex: 0 0 56px;
-		display: flex;
-		align-items: center;
-		padding: 0 18px;
-		background: #22242a;
-		border-bottom: 1px solid #353840;
-	}
-	header strong {
-		font-size: 16px;
-	}
-	main {
-		flex: 1;
-		min-height: 0;
-		padding: 10px;
-	}
-	iframe {
-		display: block;
-		width: 100%;
-		height: 100%;
-		border: 0;
-		background: white;
-		border-radius: 4px;
-	}
+    * { box-sizing: border-box; }
+    
+    html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        height: 100dvh; /* Użycie dynamicznej wysokości viewportu dla urządzeń mobilnych */
+        overflow: hidden;
+    }
+    
+    body {
+        background: #18191d;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: white;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    header {
+        height: 56px;
+        flex: 0 0 56px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 18px;
+        background: #22242a;
+        border-bottom: 1px solid #353840;
+    }
+    
+    header strong {
+        font-size: 16px;
+    }
+
+    .open-btn {
+        color: #4da6ff;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    /* Kontener naprawiający scrollowanie iframe na iOS Safari */
+    main {
+        flex: 1;
+        min-height: 0;
+        padding: 10px;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .iframe-wrapper {
+        width: 100%;
+        height: 100%;
+        min-height: 100%;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+        border-radius: 4px;
+        background: #ffffff;
+    }
+    
+    iframe {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border: 0;
+    }
 </style>
 </head>
 <body>
-	<header>
-		<strong>Prezentacja</strong>
-	</header>
+    <header>
+        <strong>Prezentacja</strong>
+        <!-- Zapasowy przycisk dla mobilnych przeglądarek -->
+        <a href="prezentacja.pdf" target="_blank" rel="noopener" class="open-btn">Otwórz pełny plik ↗</a>
+    </header>
 
-	<main>
-		<iframe
-			src="prezentacja.pdf"
-			title="Prezentacja PDF">
-		</iframe>
-	</main>
+    <main>
+        <div class="iframe-wrapper">
+            <iframe
+                src="prezentacja.pdf#view=FitH"
+                title="Prezentacja PDF">
+            </iframe>
+        </div>
+    </main>
 </body>
 </html>
